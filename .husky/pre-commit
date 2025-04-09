@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm run pre-commit
+
+# Check if package-lock.json exists and has been modified but not staged
+if [ -f "package-lock.json" ] && git diff --quiet -- package-lock.json; then
+  git diff --name-only | grep -q "package.json" && echo "Error: package.json was modified but package-lock.json wasn't updated. Run npm install before committing." && exit 1
+fi

@@ -1,0 +1,73 @@
+{
+  "name": "Trek Snout - Rehoming Dogs with Heart",
+  "short_name": "Trek Snout",
+  "description": "Responsible dog rehoming made simple and compassionate.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A1921",
+  "theme_color": "#0A1921",
+  "orientation": "any",
+  "scope": "/",
+  "categories": ["pets", "lifestyle", "social"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "apple-touch-icon"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "View Adoptable Dogs",
+      "short_name": "Adopt",
+      "description": "Browse dogs available for adoption",
+      "url": "/dogs",
+      "icons": [{ "src": "/icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Lost Dogs",
+      "short_name": "Lost Dogs",
+      "description": "View or report lost dogs",
+      "url": "/lost-dogs",
+      "icons": [{ "src": "/icons/icon-96.png", "sizes": "96x96" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/home-mobile.jpg",
+      "sizes": "1080x1920",
+      "type": "image/jpg",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshots/home-desktop.jpg",
+      "sizes": "1920x1080",
+      "type": "image/jpg",
+      "form_factor": "wide"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "share_target": {
+    "action": "/share-target",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}

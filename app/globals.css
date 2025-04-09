@@ -1,0 +1,348 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-montserrat: "";
+    --font-bitter: "";
+  }
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --vh: 1vh;
+}
+
+/* Set custom viewport height variable for mobile */
+@media (max-width: 767px) {
+  :root {
+    --vh: 1vh;
+  }
+}
+
+@layer base {
+  :root {
+    /* Background colors - slightly lightened for better contrast */
+    --background: 206 47% 10%;
+    --foreground: 204 10% 95%;
+    --card: 206 47% 14%;
+    --card-foreground: 204 10% 95%;
+    --popover: 206 47% 14%;
+    --popover-foreground: 204 10% 95%;
+    
+    /* Primary colors - adjusted for better contrast */
+    --primary: 153 35% 25%;
+    --primary-foreground: 204 10% 98%;
+    
+    /* Secondary colors - enhanced for better visibility */
+    --secondary: 210 29% 28%;
+    --secondary-foreground: 204 10% 98%;
+    
+    /* Muted colors - increased contrast for readability */
+    --muted: 206 47% 18%;
+    --muted-foreground: 204 10% 82%;
+    
+    /* Accent colors - brightened for better visibility */
+    --accent: 33 80% 55%;
+    --accent-foreground: 204 10% 98%;
+    
+    /* Destructive colors - more vibrant for clear warnings */
+    --destructive: 0 90% 65%;
+    --destructive-foreground: 204 10% 98%;
+    
+    /* Border and input - enhanced for visibility */
+    --border: 206 47% 25%;
+    --input: 206 47% 25%;
+    --ring: 33 80% 55%;
+    
+    /* Chart colors - adjusted for better distinction */
+    --chart-1: 12 80% 65%;
+    --chart-2: 173 62% 42%;
+    --chart-3: 197 40% 28%;
+    --chart-4: 43 78% 68%;
+    --chart-5: 27 90% 70%;
+    
+    /* Status colors - enhanced for clarity */
+    --success: 142 80% 40%;
+    --success-foreground: 204 10% 98%;
+    --warning: 38 95% 55%;
+    --warning-foreground: 204 10% 10%;
+    --info: 199 95% 52%;
+    --info-foreground: 204 10% 98%;
+    
+    --radius: 0.5rem;
+  }
+  
+  /* Remove light theme variables */
+  
+  html {
+    color-scheme: dark;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-tap-highlight-color: transparent;
+  }
+  h1 {
+    @apply text-[2rem] md:text-[2.5rem] font-bold tracking-tight [text-wrap:balance] leading-[1.2];
+  }
+  h2 {
+    @apply text-[1.5rem] md:text-[1.75rem] font-bold tracking-tight [text-wrap:balance] leading-[1.3];
+  }
+  h3 {
+    @apply text-[1.25rem] font-bold tracking-tight [text-wrap:balance] leading-[1.4];
+  }
+  p {
+    @apply text-base leading-[1.75] [text-wrap:pretty] mb-4;
+  }
+  small {
+    @apply text-sm leading-[1.6];
+  }
+  
+  /* Improve interactive element touch areas */
+  button, a, input[type="button"], input[type="submit"], input[type="reset"], .interactive {
+    @apply min-h-[44px] md:min-h-0;
+    @apply min-w-[44px] md:min-w-0;
+    touch-action: manipulation;
+  }
+  
+  /* Form elements optimization */
+  input, select, textarea {
+    @apply text-base;
+    /* Prevent iOS zoom on focus */
+    font-size: max(16px, 1rem);
+  }
+}
+
+@layer utilities {
+  .size-xl {
+    @apply h-14 px-8 py-6 text-lg;
+  }
+  .section-container {
+    @apply container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10 mt-14;
+  }
+  .section-title {
+    @apply text-center max-w-[800px] mx-auto mb-12 md:mb-16;
+  }
+  .section-grid {
+    @apply grid gap-8 md:gap-6 relative;
+  }
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-lg hover:scale-[1.02] relative;
+  }
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-purple-100;
+  }
+  .full-screen {
+    min-height: 100vh; /* Fallback */
+    min-height: calc(var(--vh, 1vh) * 100);
+  }
+  .mobile-safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  .mobile-safe-top {
+    padding-top: env(safe-area-inset-top, 0);
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .snap-container {
+    scroll-snap-type: y mandatory;
+  }
+  .snap-section {
+    scroll-snap-align: start;
+  }
+  
+  /* Animation utilities */
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .slide-up {
+    animation: slideUp 0.5s ease-in-out;
+  }
+  
+  .pulse {
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  /* New mobile utilities */
+  .tap-target {
+    @apply px-2 py-2;
+  }
+  
+  /* Sticky mobile header */
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  
+  /* Bottom Sheet utilities */
+  .bottom-sheet {
+    @apply fixed bottom-0 left-0 right-0 bg-background border-t rounded-t-xl z-50 shadow-lg transform transition-transform duration-300;
+  }
+  
+  .bottom-sheet-open {
+    transform: translateY(0);
+  }
+  
+  .bottom-sheet-closed {
+    transform: translateY(100%);
+  }
+  
+  /* Mobile-specific card styles */
+  .mobile-card {
+    @apply rounded-lg border bg-card p-4 shadow-sm;
+  }
+  
+  /* Sticky action bar for mobile */
+  .sticky-action-bar {
+    @apply fixed bottom-0 left-0 right-0 bg-background/90 backdrop-blur-md border-t py-3 px-4 flex items-center justify-between z-40 mobile-safe-bottom;
+  }
+  
+  /* Lazy load reveal animation */
+  .reveal {
+    @apply opacity-0 transition-opacity duration-500;
+  }
+  
+  .reveal-visible {
+    @apply opacity-100;
+  }
+  
+  /* Focus styles for better keyboard navigation */
+  .focus-visible-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  }
+}
+
+@media (max-width: 767px) {
+  .section-container {
+    @apply py-10 px-4 mt-14;
+  }
+  
+  .section-grid {
+    @apply gap-4;
+  }
+  
+  h1 {
+    @apply text-[1.75rem];
+  }
+  
+  h2 {
+    @apply text-[1.35rem];
+  }
+  
+  .card-hover {
+    @apply hover:scale-100; /* Disable hover scaling on mobile */
+  }
+  
+  /* Mobile specific spacing and layouts */
+  .mobile-px-4 {
+    @apply px-4;
+  }
+  
+  .mobile-py-3 {
+    @apply py-3;
+  }
+  
+  .mobile-mt-0 {
+    @apply mt-0;
+  }
+  
+  .mobile-stack {
+    @apply flex flex-col gap-4;
+  }
+  
+  .mobile-stack-horizontal {
+    @apply flex overflow-x-auto snap-x snap-mandatory hide-scrollbar;
+  }
+  
+  .mobile-stack-horizontal > * {
+    @apply snap-center flex-shrink-0 w-[85%];
+  }
+  
+  /* Mobile navigation adjustments */
+  .mobile-nav-item {
+    @apply py-4 px-4 text-lg border-b border-border/50;
+  }
+  
+  /* Increase all tap targets */
+  .mobile-tap-area {
+    @apply p-3;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .section-container {
+    @apply py-16 px-6 mt-14;
+  }
+}
+
+/* Fix for iOS 100vh issue */
+@supports (-webkit-touch-callout: none) {
+  .full-screen {
+    height: -webkit-fill-available;
+  }
+  
+  .safe-h-screen {
+    height: 100vh; /* Fallback */
+    height: -webkit-fill-available;
+  }
+}
+
+/* Improved a11y focus styles */
+:focus-visible {
+  @apply outline-none ring-2 ring-accent/70 ring-offset-2 ring-offset-background;
+}
+
+/* Print styles for flyers and information */
+@media print {
+  .no-print, .no-print * {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+  
+  body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: white;
+    color: black;
+  }
+  
+  .print-section {
+    page-break-inside: avoid;
+  }
+}

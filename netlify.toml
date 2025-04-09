@@ -1,0 +1,89 @@
+# Netlify configuration for Trek Snout
+# This file sets up the build settings and deployment options
+
+[build]
+  # The command to build your site
+  command = "npm run build"
+  
+  # Directory with the static files (matches output setting in next.config.js)
+  publish = "out"
+
+# Redirects and rewrites for SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Environment variable management
+[build.environment]
+  # Configure Node version
+  NODE_VERSION = "18"
+
+# Build optimization settings
+[build.processing]
+  skip_processing = false
+  
+# Process CSS with PostCSS
+[build.processing.css]
+  bundle = false
+  minify = true
+
+# Process JS with esbuild
+[build.processing.js]
+  bundle = false
+  minify = true
+
+# Optimize images
+[build.processing.images]
+  compress = true
+
+# Optimize HTML
+[build.processing.html]
+  pretty_urls = true
+
+# Cache control headers for better performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache static assets longer
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache images
+[[headers]]
+  for = "/*.{jpg,jpeg,png,gif,webp,svg,avif}"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Define Netlify webhook configuration
+[dev]
+  framework = "next"
+  targetPort = 3000
+
+# Configure webhook notifications
+[build.notifications]
+[[build.notifications]]
+  event = "deploy:succeeded"
+  type = "webhook"
+  url = "YOUR_WEBHOOK_URL/api/webhooks/netlify"
+  signed = true
+  sensitive_env_variables = ["NETLIFY_WEBHOOK_SECRET"]
+
+[[build.notifications]]
+  event = "deploy:failed"
+  type = "webhook"
+  url = "YOUR_WEBHOOK_URL/api/webhooks/netlify"
+  signed = true
+  sensitive_env_variables = ["NETLIFY_WEBHOOK_SECRET"]
+
+# Define outgoing webhook for deploy status
+[build.hooks]
+  post-success = "/api/webhooks/netlify/deploy-success"
+  post-failure = "/api/webhooks/netlify/deploy-failure"

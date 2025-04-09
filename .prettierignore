@@ -1,0 +1,16 @@
+# Build outputs
+node_modules
+.next
+out
+build
+dist
+coverage
+
+# Public files
+public
+
+# Config files
+next-env.d.ts
+postcss.config.js
+tailwind.config.ts
+next.config.js
